@@ -18,7 +18,6 @@ export default function AuthButton() {
     }
     const walletAddress = await signer.getDefaultAddress();
     const walletPublicKey = await signer.getDefaultPubKey();
-    // const walletAvatar = await signer.getDefaultPubKey();
     const walletPublicKeyString = walletPublicKey.toString();
     const walletAddressString = walletAddress.toString();
     console.log("walletAddress: ", walletAddress);
@@ -33,7 +32,11 @@ export default function AuthButton() {
     console.log("user ", user);
 
     // Insert new row if user is not found.
-    if (user === null || [] || undefined) {
+    if (
+      user === null ||
+      user === undefined ||
+      (Array.isArray(user) && user.length === 0)
+    ) {
       console.log("no user");
       const {data, error} = await supabase
         .from("users")
@@ -43,12 +46,9 @@ export default function AuthButton() {
         .select();
       console.log("User created", data);
       router.push(`/onboarding/${data[0].id}`);
+    } else {
+      console.log("user found");
     }
-    // Redirect to onboarding page if user is not allready onboarded.
-    // if (!user[0]?.isOnboarded) {
-    //   // An extra check to make sure the user gets onboarded.
-    //   router.push("/onboarding");
-    // }
   };
 
   return (

@@ -3,8 +3,8 @@ import React, {useState} from "react";
 
 export default function Copy() {
   const passwords = [
-    {label: "Main", password: "qK2hM1YL5NXHwIqqJM1N"},
-    {label: "Test", password: "bjerkeset1508"},
+    {label: "Main", password: process.env.NEXT_PUBLIC_PANDA_PRIVKEY_MAIN},
+    {label: "Test", password: process.env.NEXT_PUBLIC_PANDA_PRIVKEY_TEST},
   ];
   const [copiedIndex, setCopiedIndex] = useState(null);
 
