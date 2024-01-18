@@ -4,10 +4,17 @@ import {GorillapoolProvider, PandaSigner, bsv} from "scrypt-ts";
 import {Button} from "../ui/button";
 import {createClient} from "@/utils/supabase/client";
 import {useRouter} from "next/navigation";
+import {useSigner} from "@/context/SignerProvider";
 
 export default function AuthButton() {
   const router = useRouter();
   const supabase = createClient();
+  const {updateSigner} = useSigner();
+  const {signer} = useSigner();
+
+  if (signer) {
+    return;
+  }
 
   const handleAuth = async () => {
     const provider = new GorillapoolProvider(bsv.Networks.mainnet);
@@ -16,12 +23,12 @@ export default function AuthButton() {
     if (!isAuthenticated) {
       throw new Error(error);
     }
+    await signer.connect(provider);
+    updateSigner(signer); // Update signer in global context.
     const walletAddress = await signer.getDefaultAddress();
     const walletPublicKey = await signer.getDefaultPubKey();
     const walletPublicKeyString = walletPublicKey.toString();
     const walletAddressString = walletAddress.toString();
-    console.log("walletAddress: ", walletAddress);
-    console.log("walletAddressString: ", walletAddressString);
 
     // Find public key in users table and return user.
     let {data: user} = await supabase

@@ -16,6 +16,7 @@ import {Badge} from "@/components/ui/badge";
 export type OptionType = {
   label: string;
   value: string;
+  key: string;
 };
 
 interface MultiSelectProps {

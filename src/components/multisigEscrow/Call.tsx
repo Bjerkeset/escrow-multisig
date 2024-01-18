@@ -8,11 +8,12 @@ import {
   findSig,
 } from "scrypt-ts";
 import artifact from "@/../artifacts/statefullMultisig.json";
+import {Button} from "../ui/button";
 StatefulMultiSig.loadArtifact(artifact);
 
 export default function Call() {
   const txId =
-    "bf16dfd9162a6457a84741e3bc4c0e06eb45f0eb0a64d319473823dfd1d334b1";
+    "9237c9849cc238a128e44dddd75c3c784432d1aa056c5cf8089038b0505e6640";
   const pubKeyIdx = 1;
 
   const handleCall = async () => {
@@ -54,9 +55,7 @@ export default function Call() {
   };
   return (
     <div>
-      <button className="bg-blue-700 rounded-md px-2 py-1" onClick={handleCall}>
-        handleCall
-      </button>
+      <Button onClick={handleCall}>handleCall</Button>
     </div>
   );
 }

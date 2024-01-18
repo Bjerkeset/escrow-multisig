@@ -1,8 +1,11 @@
 import type {Metadata} from "next";
 import {Inter} from "next/font/google";
 import "../globals.css";
-import {ThemeProvider} from "@/context/providers/theme-provider";
+import {ThemeProvider} from "@/context/ThemeProvider";
 import {BGGrid} from "@/components/BGGrid";
+import {SignerProvider} from "@/context/SignerProvider";
+import {Card, CardContent} from "@/components/ui/card";
+import Navigation from "@/components/shared/Navigation";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -15,14 +18,23 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className}`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <BGGrid>{children}</BGGrid>
-        </ThemeProvider>
+        <SignerProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main className="mx-auto container max-w-[calc(65ch+100px)]  min-h-screen flex flex-col py-4 md:py-8 px-2 md:px-4">
+              <Card className="">
+                <Navigation />
+                <CardContent>
+                  <BGGrid>{children}</BGGrid>
+                </CardContent>
+              </Card>
+            </main>
+          </ThemeProvider>
+        </SignerProvider>
       </body>
     </html>
   );
