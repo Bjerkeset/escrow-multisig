@@ -9,7 +9,7 @@ const LINKS = [
   {name: "Contracts", href: "/contracts"},
 ];
 
-export default function () {
+export default function Navigation() {
   return (
     <nav className="flex w-full p-2 h-32">
       <div className="w-1/4">

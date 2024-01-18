@@ -24,7 +24,7 @@ export default function ContractCard({contract}: any) {
       <CardFooter className="flex flex-col gap-1">
         <p> Amount locked </p>
         <p>
-          {contract.sats_amount_locked} <span>satoshi's</span>
+          {contract.sats_amount_locked} <span>satoshi&aposs</span>
         </p>
         <Button asChild>
           <Link href={`/contracts/${contractTxId}`}>View</Link>

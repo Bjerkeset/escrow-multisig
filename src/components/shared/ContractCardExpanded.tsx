@@ -32,7 +32,6 @@ export default function ContractCardExpanded({txId, contract}: Props) {
   console.log("contract: ", contract.title);
 
   useEffect(() => {
-    // if (signer) {
     console.log("signer: ", signer);
     async function getContractInstace() {
       const contractId = {
@@ -51,8 +50,7 @@ export default function ContractCardExpanded({txId, contract}: Props) {
       }
     }
     getContractInstace();
-    // }
-  }, []);
+  }, [signer, txId]);
 
   return (
     <Card>

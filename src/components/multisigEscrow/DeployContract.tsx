@@ -105,7 +105,7 @@ export default function DeployContract({userId}: {userId: string}) {
       }
     }
     fetchUsers();
-  }, []);
+  }, [supabase]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("signer", signer);
@@ -372,6 +372,7 @@ export default function DeployContract({userId}: {userId: string}) {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="amount"
@@ -382,7 +383,7 @@ export default function DeployContract({userId}: {userId: string}) {
                     <Input type="number" {...field} />
                   </FormControl>
                   <FormDescription>
-                    The amount "in sats" locked in the smart contract
+                    The amount in sats locked in the smart contract
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
