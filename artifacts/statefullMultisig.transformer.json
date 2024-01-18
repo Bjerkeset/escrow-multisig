@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "errors": [],
+  "scryptfile": "statefullMultisig.scrypt",
+  "sourceMapFile": "statefullMultisig.scrypt.map",
+  "ctxMethods": [
+    "pay",
+    "add"
+  ]
+}
