@@ -14,28 +14,24 @@ const ABOUT_CONTENT = [
     subTitle: "",
     content:
       "Blockchain technology allows for the transfer of digital assets from one set of keys to another without the need for an intermediary institution. Typically, the only requirement to transact a coin (UTXO) is a valid signature, which demonstrates possession of the private keys associated with the UTXO. What this smart contract introduces are additional conditions for transacting specific coins. We achieve this by using a smart contractracting language that customizes the locking script of an outgoing transaction. Adding the condition that two out of three parties must sign off on the transaction before it can be spent. ",
-    sideTag: "1.",
   },
   {
     title: "How to use it",
     subTitle: "Step 1: Create a wallet at Panda Wallet",
     content:
       "Go to the Chrome Web Store and download the Panda Wallet browser extension. We chouse this wallet because it is a opnes-sourced and non-custodial sCrypt compatible wallet.",
-    sideTag: "1.",
   },
   {
     // title: "How it works",
     subTitle: "Step 2: Create a multisig escrow agreement",
     content:
       "Navigate to create contract. Fill out the form, select an escrow validator in case of a dispute, selecte who the cuntracts conterparty is, and select the payment amount the counterparty will recive",
-    sideTag: "1.",
   },
   {
     // title: "How it works",
-    subTitle: "Step 2: Create a multisig escrow agreement",
+    subTitle: "Step 3: Validate to the agreement",
     content:
-      "Navigate to create contract. Fill out the form, select an escrow validator in case of a dispute, selecte who the cuntracts conterparty is, and select the payment amount the counterparty will recive",
-    sideTag: "1.",
+      "If the contract terms are fulfilled, then call the validate function to release the funds to the counterparty. If the contract terms are not fulfilled, the escrow validator will have the final say on who recives the funds.",
   },
 ];
 
