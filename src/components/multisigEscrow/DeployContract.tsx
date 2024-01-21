@@ -109,6 +109,13 @@ export default function DeployContract({userId}: {userId: string}) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("signer", signer);
+
+    // Helper function to find username by public key
+    function findUsernameByPublicKey(publicKey) {
+      const user = users.find((user) => user.public_key === publicKey);
+      return user ? user.username : null;
+    }
+
     // Proceed only if signer is available
     if (!signer) {
       console.error("Signer is not available, log in again.");
@@ -118,6 +125,7 @@ export default function DeployContract({userId}: {userId: string}) {
     const myPublicKey = await signer.getDefaultPubKey();
     const destAddr = Addr(myAddress.toByteString()); // Format address.
 
+    console.log("all users>>>", users);
     console.log("onSubmit values", values);
     const escrow = values.escrow;
     const counterparty = values.counterparty;
@@ -125,6 +133,15 @@ export default function DeployContract({userId}: {userId: string}) {
     const title = values.title;
     const description = values.description;
     const amount = Number(values.amount);
+
+    const creatorPublicKey = myPublicKey.toString();
+    const counterpartyPublicKey = values.counterparty;
+    const escrowPublicKey = values.escrow;
+
+    // Find usernames by public keys
+    const creatorUsername = findUsernameByPublicKey(creatorPublicKey);
+    const counterpartyUsername = findUsernameByPublicKey(counterpartyPublicKey);
+    const escrowUsername = findUsernameByPublicKey(escrowPublicKey);
 
     try {
       const validatorSignatory = {
@@ -167,11 +184,17 @@ export default function DeployContract({userId}: {userId: string}) {
             {
               title: title,
               terms: description,
-              creator_pubkey: creator,
-              validator_pubkey: escrow,
-              counterparty_pubkey: counterparty,
+              creator_pubkey: creatorPublicKey,
+              validator_pubkey: escrowPublicKey,
+              counterparty_pubkey: counterpartyPublicKey,
               sats_amount_locked: amount,
               deployment_tx_id: deployTx.id,
+              author: {username: creatorUsername, pubkey: creatorPublicKey},
+              escrow: {username: escrowUsername, pubkey: escrowPublicKey},
+              counterparty: {
+                username: counterpartyUsername,
+                pubkey: counterpartyPublicKey,
+              },
             },
           ])
           .select();

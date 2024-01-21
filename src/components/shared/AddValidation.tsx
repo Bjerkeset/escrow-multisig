@@ -15,7 +15,12 @@ export default function AddValidation({txId}: {txId: string}) {
   StatefulMultiSig.loadArtifact(artifact);
   const {signer} = useSigner();
   const supabase = createClient();
+
   const handleCall = async () => {
+    if (!signer) {
+      console.error("No signer found");
+      return;
+    }
     // await signer.connect(new ScryptProvider());
     // const provider = new GorillapoolProvider(bsv.Networks.mainnet);
     // const signer = new PandaSigner(provider);
@@ -95,5 +100,5 @@ export default function AddValidation({txId}: {txId: string}) {
     }
   };
 
-  return <Button>Add Validation</Button>;
+  return <Button onClick={handleCall}>Add Validation</Button>;
 }

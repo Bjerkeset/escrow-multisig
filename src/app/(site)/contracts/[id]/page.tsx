@@ -12,10 +12,15 @@ export default async function ContractPage({params}: {params: {id: string}}) {
     // Use .or to combine conditions
     .or(`latest_tx_id.eq.${params.id},deployment_tx_id.eq.${params.id}`);
 
-  console.log("data: ", data);
+  // console.log("get contract by txid ", data);
+
   return (
     <div>
-      <ContractCardExpanded contract={data} txId={params.id} />
+      {data ? (
+        <ContractCardExpanded contract={data} txId={params.id} />
+      ) : (
+        <div>Loading...</div>
+      )}
     </div>
   );
 }
